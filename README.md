@@ -17,3 +17,6 @@ Links to subfolders of the given base. To be used as a dashboard.
 
 You can exclude folders and link to sub-folders / files instead.
 
+prayers
+-------
+Things that you can pray for, the words move about the screen at random.
