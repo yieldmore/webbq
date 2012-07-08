@@ -4,12 +4,19 @@ if (!isset($initHtml)) include_once '../inc/html.php';
 
 if (!isset($homeFol)) $homeFol = "../../"; // because running in webbq subdirectory
 
-// Folders to exclude
-$exclude = array('xampp', '.git', 'inc');
-
-// When it encounters a folder with the given name, it appends the text for the link.
-// if its an array, it does this for each item.
-$suffix = array('blog' => 'wp-login.php', 'webbq' => 'dir');
+if (file_exists('./local.php'))
+{
+  include './local.php';
+}
+else
+{
+  // Folders to exclude
+  $exclude = array(null, 'xampp', '.git', 'inc');
+  
+  // When it encounters a folder with the given name, it appends the text for the link.
+  // if its an array, it does this for each item.
+  $suffix = array('webbq' => 'dir');
+}
 
 if (!isset($title)) $title = 'PHP Hosted Apps [cselian]';
 $content = '<a class="right" href="#">&hellip;</a>
@@ -21,7 +28,8 @@ $home  = opendir($homeFol);
 while (false !== ($item = readdir($home)))
 {
   if ($item == "." || $item == "..") continue;
-  if (!is_dir($homeFol . $item) || array_search($item, $exclude) || $item == "d") continue;
+  
+  if (!is_dir($homeFol . $item) || array_search($item, $exclude)) continue;
   
   $lnk = array($item);
   if (isset($suffix[$item]))
