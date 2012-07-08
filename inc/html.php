@@ -17,6 +17,8 @@ function link_p($link, $txt = null, $return = 1)
 
 function link_home($return = 0)
 {
-  
+  global $root;
+  $link = $root == '../' ? '../' : './';
+  return link_p($link, 'Home', $return);
 }
 ?>

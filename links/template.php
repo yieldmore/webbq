@@ -28,7 +28,8 @@ a:hover { background-color: #ffcc99!important; }
       <?php echo $content; ?>
       <hr />
       <div id="footer">
-       &copy; <?php echo date('Y'); ?> <a href="http://github.com/ImranCS/webbq/">cselian.com</a>
+       &copy; <?php echo date('Y'); ?> <a href="http://github.com/ImranCS/webbq/">cselian.com</a> |
+       <?php link_home(0); ?>
       </div>
     </div>
   </body>

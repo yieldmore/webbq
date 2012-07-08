@@ -1,13 +1,23 @@
 <?php
 
 if (!isset($initHtml)) include_once '../inc/html.php';
+include_once $root . 'inc/io.php';
 
 $title = 'Links Dashboard [cselian]';
 $content = '<a class="right" href="?admin=1">&hellip;</a>
       <h2>Cselian.com Web</h2>
       <hr />
 ';
-$fil = "./dir.txt";
+
+$txts = get_files('./', '.txt');
+if (count($txts) > 1)
+{
+  $content .= 'Data Files: ';
+  foreach ($txts as $v) $content .= link_p('./?file=' . $v, $v);
+  $content .= '<hr/>';
+}
+
+$fil = isset($_GET['file']) ? $_GET['file'] . '.txt' : "./default.txt";
 
 if (isset($_POST['txt']))
 {
