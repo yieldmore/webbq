@@ -19,6 +19,7 @@ h2 { font-size: 22px; text-transform: uppercase; letter-spacing: 4px; margin: 0p
 #sites a.right { float: right; } #footer a { color: #336699; }
 a, a:visited { color: #da3838; text-decoration: none; }
 a:hover { background-color: #ffcc99!important; }
+#info { background-color: #99ff99; border: 1px #006600 solid; padding: 6px; }
     //-->
     /*]]>*/
     </style>

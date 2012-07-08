@@ -4,7 +4,8 @@ if (!isset($initHtml)) include_once '../inc/html.php';
 include_once $root . 'inc/io.php';
 
 $title = 'Links Dashboard [cselian]';
-$content = '<a class="right" href="?admin=1">&hellip;</a>
+$qs = isset($_GET['file']) ? '&file=' . $_GET['file'] : '';
+$content = '<a class="right" href="?admin=1' . $qs . '">&hellip;</a>
       <h2>Cselian.com Web</h2>
       <hr />
 ';
@@ -17,17 +18,18 @@ if (count($txts) > 1)
   $content .= '<hr/>';
 }
 
-$fil = isset($_GET['file']) ? $_GET['file'] . '.txt' : "./default.txt";
+$fil = isset($_GET['file']) ? $_GET['file'] . '.txt' : './default.txt';
 
 if (isset($_POST['txt']))
 {
   file_put_contents($fil, $_POST['txt']);
   $c = file_exists($fil) ? file_get_contents($fil) : "";
-  $content .= '<h5>Links Saved</h5>';
+  $content .= '<div id="info">Links Saved</div>';
 }
 if ($_GET['admin'])
 {
-  $plain = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
+  $qs = isset($_GET['file']) ? '?file=' . $_GET['file'] : '';
+  $plain = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . $qs;
   $c = file_exists($fil) ? file_get_contents($fil) : "";
   $content .= sprintf('Format:<pre>#Section
 Url|Text</pre>
