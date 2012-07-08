@@ -1,0 +1,11 @@
+#Email
+http://gmail.com|gmail
+http://mail.yahoo.com|yahoo
+#Web
+http://twitter.com/#me|twitter
+http://facebook.com/#me|facebook
+http://linkedin.com/#me|linkedin
+#Cselian
+http://cselian.com/blog/|blog
+http://tg.cselian.com/|tg
+http://biblios.cselian.com/|biblios

@@ -1,0 +1,19 @@
+#Current
+http://biblios.cselian.com/|biblios
+http://aerial.cselian.com/|aerial
+http://tg.cselian.com/|tg
+http://cselian.com/blog/|blog
+http://wp.cselian.com/share|wp/share
+#Logins
+http://tg.cselian.com/wp-login.php|tg
+http://cselian.com/blog/wp-login.php|blog
+http://wp.cselian.com/share/wp-login.php|wp/share
+#File Thingies
+http://cselian.com/d/|Dump
+http://cselian.com/ad/im|IM
+http://cselian.com/guest/|Guest
+#Unused
+http://cselian.com/imran/home/|imran
+http://art.cselian.com/|art
+http://wp.cselian.com/|wp
+http://cselian.com/|root
