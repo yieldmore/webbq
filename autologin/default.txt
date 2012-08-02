@@ -1,0 +1,2 @@
+#Websites
+http://mydomain.com/login/|mydomain|user=me,pass=secret

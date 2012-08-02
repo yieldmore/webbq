@@ -12,15 +12,16 @@
 body { margin: 20px; font: bold 18px bold verdana; background-color: #cccc99; }
 #footer { font-size: 12pt; }
 h2 { font-size: 22px; text-transform: uppercase; letter-spacing: 4px; margin: 0px; }
-#sites { margin: 0px 200px 0px 200px; text-align: center; background-color: #ffe; padding: 10px 50px 10px 50px; }
+#sites { margin: 0px 200px 0px 200px; background-color: #ffe; padding: 10px 50px 10px 50px; }
 #sites a { background-color: #99cccc; letter-spacing: 2px; 
-  width: 120px; display: inline-block; padding: 10px; margin: 5px; }
+  width: 80px; display: inline-block; padding: 2px 10px 2px 10px; margin: 5px; }
+#sites strong{ width: 120px; display: inline-block; text-align: right; }
 #sites a.right, #footer a { margin: 0px; padding: 2px; background-color: transparent; width: auto; }
 #sites a.right { float: right; } #footer a { color: #336699; }
 a, a:visited { color: #da3838; text-decoration: none; }
 a:hover { background-color: #ffcc99!important; }
 #info { background-color: #99ff99; border: 1px #006600 solid; padding: 6px; }
-    //-->
+<?php echo isset($extracss) ? $extracss . "\r\n" : ""; ?>    //-->
     /*]]>*/
     </style>
   </head>
