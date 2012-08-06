@@ -1,5 +1,7 @@
 /dir/local.php
-/links/local.txt
-/prayers/local.txt
+/links/*.txt
+/prayers/*.txt
 /prayers/prayers.js
-/autologin/local.txt
+/autologin/*.txt
+/biorhythm/*.txt
+

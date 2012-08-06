@@ -3,41 +3,19 @@
 if (!isset($initHtml)) include_once '../inc/html.php';
 include_once $root . 'inc/io.php';
 
-$title = 'Autologin [cselian]';
+$title = 'Biorhythm [cselian]';
 $qs = isset($_GET['file']) ? '&file=' . $_GET['file'] : '';
 $content = '<a class="right" href="?admin=1' . $qs . '">&hellip;</a>
-      <h2>Cselian.com Autologin</h2>
+      <h2>Cselian.com Biorhythm<a style="width: auto;" href="http://en.wikipedia.org/wiki/Biorhythm">...</a></h2>
       <hr />
 ';
 
 $extracss = '.multiform input[type=submit] { margin-left: 20px; }
-.multiform strong, strong.solo { font-weight: normal; }
-.multiform a, a.solo { width: auto!important; font-weight: normal; font-size: 10pt; }
-a.solo { margin-left: 94px!important; }';
+.multiform strong { font-weight: normal; }';
 
-function login_p($link, $return = 1)
+function name_p($link, $fil)
 {
-  if (count($link) == 2)
-  {
-    $res .= sprintf('  <strong class="solo">%s</strong><a class="solo" href="%s">%s</a><br />
-', $link[1], $link[0], $link[0]);
-    if ($return) return $res; else echo $res;
-  }
-  $res = sprintf('
-<form class="multiform" action="%s" method="post" target="%s">
-  <strong>%s</strong>', $link[0], $link[1], $link[1]);
-  $fields = explode(",", $link[2]);
-  foreach ($fields as $f)
-  {
-    $nv = explode("=", $f);
-    $res .= sprintf('  <input name="%s" value="%s" type="hidden" />
-', $nv[0], trim($nv[1]));
-  }
-  $res .= sprintf('  <input value="Submit" type="submit" />
-  <a href="%s">%s</a>
-</form>
-', $link[0], $link[0]);
-  if ($return) return $res; else echo $res;
+  return link_p(sprintf('?name=%s&dob=%s&file=%s', $link[0], $link[1], $fil), $link[0]);
 }
 
 $txts = get_files('./', '.txt');
@@ -56,19 +34,45 @@ if (isset($_POST['txt']))
   $c = file_exists($fil) ? file_get_contents($fil) : "";
   $content .= '<div id="info">Links Saved</div>';
 }
+
+$admin = 0;
 if ($_GET['admin'])
 {
+  $admin = 1;
   $qs = isset($_GET['file']) ? '?file=' . $_GET['file'] : '';
   $plain = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . $qs;
   $c = file_exists($fil) ? file_get_contents($fil) : "";
   $content .= sprintf('Format:<pre>#Section
-Url|Text|name=value,name=value</pre>
+Name|DOB (DD/MM/YYYY)</pre>
 <form method="post" action="%s"><textarea rows="20" cols="80" name="txt">%s</textarea><br/>
   <input type="submit" /></form>', $plain, $c);
 }
-else if (file_exists($fil) || isset($_GET['new']))
+
+if (!$admin && $_GET['name'])
 {
-  if (isset($_GET['new'])) file_put_contents($fil, "");
+  $date = explode("-", $_GET['dob']);
+  $chart .= sprintf("<!-- 
+
+You can format the output text by defining styles
+for: H1, H2, H3, p, th, input, select and body in a CSS
+style sheet. See: http://www.w3.org/Style/CSS/
+
+This code and output may not be changed
+without written permission
+
+-->
+<!-- Biorhythm Calculator - Begin -->
+<!-- http://biorhythms.perbang.dk -->
+
+<script type='text/javascript' src='http://biorhythms.perbang.dk/page.biorhythms/?js=1&d=%s&m=%s&y=%s&name=%s&t=12&min=37&z=1&phy=1&emo=1&inte=1&spi=1&awa=1&aes=1&intu=1&lang=en'></script><noscript><a href='http://www.procato.com/biorhythm/'>Free Biorhythms</a></noscript>
+
+<!-- Biorhythm Calculator - End -->", $date[0], $date[1], $date[2], $_GET['name']);
+
+}
+
+
+if (!$admin && file_exists($fil))
+{
   $txt = file($fil);
   $first = 1;
   foreach ($txt as $lin) {
@@ -80,12 +84,13 @@ else if (file_exists($fil) || isset($_GET['new']))
     }
     else
     {
-      $content .= login_p(explode("|", $lin));
+      $content .= name_p(explode("|", $lin), $_GET['file']);
     }
   }
+  $content .= $chart;
   //dump($txt);
 }
-else
+else if (!$admin)
 {
   $admin = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . '?admin=1';
   $content .= link_p($admin, 'admin');

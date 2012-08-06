@@ -31,22 +31,23 @@ while (false !== ($item = readdir($home)))
   
   if (!is_dir($homeFol . $item) || array_search($item, $exclude)) continue;
   
-  $lnk = array($item);
   if (isset($suffix[$item]))
   {
     if (is_array($suffix[$item]))
     {
       $lnk = array();
-      foreach ($suffix[$item] as $i) $lnk[] = $item . '/' . $suffix[$item];
+      foreach ($suffix[$item] as $i)
+        $content .= link_p($homeFol . $item . '/' . $i, $i);
     }
     else
     {
-      $lnk[0] = $item . '/' . $suffix[$item];
+      $content .= link_p($homeFol . $item . '/' . $suffix[$item], $item);
     }
   }
-  foreach ($lnk as $l)
-    $content .= sprintf('      <a href="%s%s">%s</a>
-', $homeFol, $l, $item);
+  else
+  {
+    $content .= link_p($homeFol . $item, $item);
+  }
 }
 
 include $root . 'links/template.php';
